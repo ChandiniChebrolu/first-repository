@@ -1,0 +1,21 @@
+#!/bin/bash
+USERID=$(id -u)
+if[ USERID -ne 0 ]
+then
+ echo "please run the script with root user"
+ exit 1
+fi
+yum list installed git
+if[$? -ne 0]
+ then 
+  echo "git is already installed"
+ else
+ yum install git -y
+  if[$? -ne 0]
+  then 
+   echo "git is filed to install"
+  else
+   echo "git is successfully installed"
+  fi
+fi
+ 
