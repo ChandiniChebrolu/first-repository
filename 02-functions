@@ -14,6 +14,7 @@ validate() {
    echo "$2.. failed"
   else
    echo "$2.. Success"
+   
 }
 
 for i in $@
