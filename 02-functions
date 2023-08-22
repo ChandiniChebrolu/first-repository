@@ -1,21 +1,28 @@
 #!/bin/bash
+Logdir=/home/centos/app_logs
+Date=$(date +%F:%H:%M:%S)
+Logfile=Logdir/$0-$Date.log
 USERID=$(id -u)
 if [ $USERID -ne 0 ]
 then
  echo "please run the script with root user"
  exit 1
 fi
-yum list installed git
-if [ $? -ne 0 ]
-then
-  echo "git is already installed"
- else
- yum install git -y
-  if [ $? -ne 0 ]
-  then 
-    echo "git is failed to install"
+
+validate(){
+  if [ $1 -ne 0 ]
+  then
+   echo "$2.. failed"
   else
-   echo "git is successfully installed"
-  fi
-fi
- 
+   echo "$2.. Success"
+}
+for i in $@
+do
+ yum list installed $i
+ if [$? -ne 0 ]
+ then
+  echo "$i is not installed ,let install $i"
+  yum install $i -y &>>Logfile
+  validate() $? "git installation"
+ fi
+
