@@ -24,7 +24,7 @@ do
  then
   echo "$i is not installed ,let install $i"
   yum install $i -y &>>Logfile
-   validate()$?"installation $i"
+   validate $? "installation $i"
  fi
 done
 
