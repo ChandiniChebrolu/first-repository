@@ -7,9 +7,9 @@ then
 fi
 yum list installed git
 if[$? -ne 0]
- then 
+then 
   echo "git is already installed"
- else
+else
  yum install git -y
   if[$? -ne 0]
   then 
